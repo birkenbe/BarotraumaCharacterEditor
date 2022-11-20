@@ -3,6 +3,7 @@
 
     // NOTE: Generated code may require at least .NET Framework 4.5 or .NET Core/Standard 2.0.
     /// <remarks/>
+    [Obsolete("First attempt to unmarshal XML, not complete since example didn't include every item. Using LINQ to XML from now on.")]
     [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]

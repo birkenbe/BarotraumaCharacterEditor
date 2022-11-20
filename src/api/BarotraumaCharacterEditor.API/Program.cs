@@ -1,3 +1,6 @@
+using BarotraumaCharacterEditor.API.Models;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +9,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddDbContext<CharacterDataBlobContext>(o => o.UseMySQL(builder.Configuration.GetConnectionString("")));
 
 var app = builder.Build();
 
@@ -21,5 +25,19 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+try
+{
+    var dbContext = app.Services.GetRequiredService<CharacterDataBlobContext>();
+    dbContext.Database.Migrate();
+}
+catch (Exception ex)
+{
+    var logger = app.Logger;
+
+    logger.LogError(ex, "An error occurred while migrating or seeding the database.");
+
+    throw;
+}
 
 app.Run();
