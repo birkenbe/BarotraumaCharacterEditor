@@ -10,6 +10,6 @@ namespace BarotraumaCharacterEditor.API.Models
             
         }
 
-        public DbSet<CharacterDataBlob> CharacterDataBlob { get; set; }
+        public DbSet<CharacterDataBlob> CharacterDataBlobs { get; set; }
     }
 }

@@ -13,7 +13,7 @@ namespace BarotraumaCharacterEditor.API.Repositories
 
         public async Task<CharacterDataBlob> Create(CharacterDataBlob data)
         {
-            _context.CharacterDataBlob.Add(data);
+            _context.CharacterDataBlobs.Add(data);
             await _context.SaveChangesAsync();
 
             return data;
@@ -21,19 +21,20 @@ namespace BarotraumaCharacterEditor.API.Repositories
 
         public async Task Delete(string id)
         {
-            CharacterDataBlob toRemove = await _context.CharacterDataBlob.FindAsync(id);
-            _context.CharacterDataBlob.Remove(toRemove);
+            CharacterDataBlob toRemove = await _context.CharacterDataBlobs.FindAsync(id);
+            _context.CharacterDataBlobs.Remove(toRemove);
             await _context.SaveChangesAsync();
         }
 
-        public Task<CharacterDataBlob> Get(string id)
+        public async Task<CharacterDataBlob> Get(string id)
         {
-            throw new NotImplementedException();
+            return await _context.CharacterDataBlobs.FindAsync(id);
         }
 
-        public Task Update(CharacterDataBlob data)
+        public async Task Update(CharacterDataBlob data)
         {
-            throw new NotImplementedException();
+            _context.Entry(data).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            await _context.SaveChangesAsync();
         }
     }
 }
