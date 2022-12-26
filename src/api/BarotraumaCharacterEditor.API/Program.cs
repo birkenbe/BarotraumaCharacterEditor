@@ -11,7 +11,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ICharacterDataBlobRepository, CharacterDataBlobRepository>();
-builder.Services.AddDbContext<CharacterDataBlobContext>(options => options.UseMySQL(builder.Configuration.GetConnectionString("")));
+builder.Services.AddDbContext<CharacterDataBlobContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("CharacterBlobDatabase")));
 
 var app = builder.Build();
 
