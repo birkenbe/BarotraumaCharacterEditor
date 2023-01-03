@@ -19,7 +19,12 @@ namespace BarotraumaCharacterEditor.API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<CharacterDataBlob>> GetCharacterData(string id)
         {
-            return await _characterDataBlobRepository.Get(id);
+            CharacterDataBlob? characterData = await _characterDataBlobRepository.Get(id);
+            if(characterData == null)
+            {
+                return NotFound();
+            }
+            return Ok(characterData);
         }
 
         [HttpPost]

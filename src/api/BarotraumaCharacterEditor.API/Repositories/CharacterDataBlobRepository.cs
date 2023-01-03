@@ -26,8 +26,12 @@ namespace BarotraumaCharacterEditor.API.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<CharacterDataBlob> Get(string id)
+        public async Task<CharacterDataBlob?> Get(string id)
         {
+            if(string.IsNullOrEmpty(id) || _context.CharacterDataBlobs == null)
+            {
+                return null;
+            }
             return await _context.CharacterDataBlobs.FindAsync(id);
         }
 
