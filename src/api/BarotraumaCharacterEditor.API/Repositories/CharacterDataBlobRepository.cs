@@ -35,10 +35,12 @@ namespace BarotraumaCharacterEditor.API.Repositories
             return await _context.CharacterDataBlobs.FindAsync(id);
         }
 
-        public async Task Update(CharacterDataBlob data)
+        public async Task<CharacterDataBlob> Update(CharacterDataBlob data)
         {
             _context.Entry(data).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             await _context.SaveChangesAsync();
+
+            return data;
         }
     }
 }

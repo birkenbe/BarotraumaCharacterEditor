@@ -8,7 +8,7 @@ namespace BarotraumaCharacterEditor.API.Repositories
 
         Task<CharacterDataBlob> Create(CharacterDataBlob data);
 
-        Task Update(CharacterDataBlob data);
+        Task<CharacterDataBlob> Update(CharacterDataBlob data);
 
         Task Delete(string id);
     }

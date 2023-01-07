@@ -11,9 +11,10 @@ namespace BarotraumaCharacterEditor.API.Models
 
         public string Data { get; set; }
 
-        public CharacterDataBlob()
+        public CharacterDataBlob(String hash, String data)
         {
-
+            this.Hash= hash;
+            this.Data= data;
         }
     }
 }
