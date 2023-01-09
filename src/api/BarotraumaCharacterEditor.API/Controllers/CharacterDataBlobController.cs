@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Cryptography;
 using System.Text;
+using System.Xml.Linq;
 
 namespace BarotraumaCharacterEditor.API.Controllers
 {
@@ -42,6 +43,17 @@ namespace BarotraumaCharacterEditor.API.Controllers
                 return CreatedAtAction(nameof(PutCharacterData), new { id }, newData);
             }
             return CreatedAtAction(nameof(PutCharacterData), new { id }, toUpsert);
+        }
+
+        [HttpPost("/changeJob")]
+        public async Task<ActionResult<CharacterDataBlob>> ChangeJob(string targetPlayerName, string changeToJob, [FromBody] string rawData)
+        {
+            XElement xmlData = XElement.Parse(rawData);
+            XElement? targetPlayer = xmlData.Descendants("Character").First(node => node.Attribute("name")?.Value == targetPlayerName);
+            if(targetPlayer != null)
+            {
+                XElement job = targetPlayer.Descendants("job").First();
+            }
         }
     }
 }
